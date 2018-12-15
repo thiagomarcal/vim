@@ -6,7 +6,6 @@ set clipboard=unnamedplus
 set laststatus=2
 set noshowmode
 set nu
-set autochdir
 set list
 set listchars=tab:▸\ ,eol:¬
 set noswapfile
@@ -58,7 +57,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mtth/scratch.vim'
-Plug 'matze/vim-move'
 Plug 'quabug/vim-gdscript'
 Plug 'calviken/vim-gdscript3'
 Plug 'Valloric/YouCompleteMe'
@@ -66,6 +64,8 @@ Plug 'Shougo/echodoc.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'danro/rename.vim'
 Plug 'tpope/vim-surround'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'qpkorr/vim-bufkill'
 
 Plug 'dunstontc/vim-vscode-theme'
 let g:echodoc_enable_at_startup = 1
@@ -106,7 +106,6 @@ set background=dark
 colorscheme codedark
 
 
-let g:move_key_modifier = 'C'
 let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
@@ -124,5 +123,18 @@ au BufNewFile,BufRead *.py
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
+"MOVE LINES
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+inoremap <leader>j <Esc>:m .+1<CR>==gi
+inoremap <leader>k <Esc>:m .-2<CR>==gi
+vnoremap <leader>j :m '>+1<CR>gv=gv
+vnoremap <leader>k :m '<-2<CR>gv=gv
 
+"SAVE BUFFERS
+nmap <c-s> :w<CR>
+vmap <c-s> <Esc><c-s>gv
+imap <c-s> <Esc><c-s>
 
+"KILL BUFFERS WITHOUT CLOSING VS
+map <C-c> :BD<cr>
