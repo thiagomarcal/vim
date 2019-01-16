@@ -31,7 +31,7 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>c  <Plug>(go-coverage)
 
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-nnoremap <silent> <C-p> :FZF<CR>
+"nnoremap <silent> <C-p> :FZF<CR>
 
 
 
@@ -66,6 +66,13 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'qpkorr/vim-bufkill'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+
+let g:easytags_async=1
+
+nnoremap <leader>p :CtrlPTag<CR>
 
 Plug 'dunstontc/vim-vscode-theme'
 let g:echodoc_enable_at_startup = 1
@@ -93,7 +100,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 Plug 'davidhalter/jedi-vim'
-Plug 'ap/vim-buftabline'
 Plug 'pangloss/vim-javascript'
 Plug '~/.fzf'
 
@@ -121,7 +127,6 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "MOVE LINES
 nnoremap <leader>j :m .+1<CR>==
