@@ -22,7 +22,7 @@ syntax on
 vmap y y`]
 
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
 autocmd FileType go nnoremap map <f3> :GoDef<CR>
@@ -166,19 +166,12 @@ au BufNewFile,BufRead *.py
 "let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "MOVE LINES
-nnoremap ∆ :m .+1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
-
-nnoremap ʝ :m .+1<CR>==
-nnoremap ĸ :m .-2<CR>==
-inoremap ʝ <Esc>:m .+1<CR>==gi
-inoremap ĸ <Esc>:m .-2<CR>==gi
-vnoremap ʝ :m '>+1<CR>gv=gv
-vnoremap ĸ :m '<-2<CR>gv=gv
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
+inoremap <leader>j <Esc>:m .+1<CR>==gi
+inoremap <leader>k <Esc>:m .-2<CR>==gi
+vnoremap <leader>j :m '>+1<CR>gv=gv
+vnoremap <leader>k :m '<-2<CR>gv=gv
 
 
 "SAVE BUFFERS
