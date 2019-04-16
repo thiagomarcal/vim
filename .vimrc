@@ -13,7 +13,7 @@ set hlsearch
 set splitright
 
 "se mouse+=a
-
+set completeopt-=preview
 set rtp+=$GOROOT/misc/vim
 filetype off
 filetype plugin indent on
@@ -32,12 +32,6 @@ autocmd FileType go nmap <leader>c  <Plug>(go-coverage)
 
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 "nnoremap <silent> <C-p> :FZF<CR>
-
-
-
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-nnoremap <C-X> :bdelete<CR>
 
 autocmd FileType python nnoremap <buffer> <F5> :exec '!clear; python' shellescape(@%, 1)<cr>
 
