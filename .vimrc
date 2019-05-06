@@ -1,3 +1,4 @@
+set hidden
 set visualbell
 set wildmenu
 "set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -13,6 +14,10 @@ set hlsearch
 set splitright
 set completeopt-=preview
 "se mouse+=a
+"
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 
 set rtp+=$GOROOT/misc/vim
 filetype off
@@ -22,7 +27,9 @@ syntax on
 vmap y y`]
 
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType c set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
 autocmd FileType go nnoremap map <f3> :GoDef<CR>
@@ -32,6 +39,41 @@ autocmd FileType go nnoremap map <f5> :GoRun<CR>
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>c  <Plug>(go-coverage)
+
+" coc binds
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+nmap <leader>rn <Plug>(coc-rename)
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 "nnoremap <silent> <C-p> :FZF<CR>
@@ -93,7 +135,6 @@ autocmd FileType vue syntax sync fromstart
 
 Plug 'othree/html5.vim'
 
-Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
 let g:easytags_async=1
