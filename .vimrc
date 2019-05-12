@@ -15,7 +15,7 @@ set splitright
 set completeopt-=preview
 "se mouse+=a
 "
-set cmdheight=2
+"set cmdheight=2
 set updatetime=300
 set shortmess+=c
 
@@ -25,6 +25,8 @@ filetype plugin indent on
 syntax on
 
 vmap y y`]
+
+xnoremap p "_dP
 
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
