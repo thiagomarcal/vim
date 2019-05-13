@@ -114,7 +114,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'qpkorr/vim-bufkill'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'w0rp/ale'
+Plug 'xolox/vim-notes'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'unblevable/quick-scope'
+
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 Plug 'neomake/neomake'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'hashivim/vim-terraform'
