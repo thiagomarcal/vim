@@ -118,9 +118,22 @@ Plug 'xolox/vim-notes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'unblevable/quick-scope'
 
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_max_chars=80
+
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
 
 Plug 'Yggdroot/indentLine'
+Plug 'terryma/vim-smooth-scroll'
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 Plug 'neomake/neomake'
 Plug 'vim-scripts/indentpython.vim'
