@@ -116,6 +116,7 @@ Plug 'dunstontc/vim-vscode-theme'
 Plug 'w0rp/ale'
 Plug 'xolox/vim-notes'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
 Plug 'unblevable/quick-scope'
 
 "let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
