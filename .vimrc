@@ -120,6 +120,8 @@ Plug 'unblevable/quick-scope'
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+Plug 'Yggdroot/indentLine'
+
 Plug 'neomake/neomake'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'hashivim/vim-terraform'
