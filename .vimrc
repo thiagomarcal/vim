@@ -22,7 +22,6 @@ set shortmess+=c
 set rtp+=$GOROOT/misc/vim
 filetype off
 filetype plugin indent on
-syntax on
 
 vmap y y`]
 
@@ -31,7 +30,7 @@ xnoremap p "_dP
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
-autocmd FileType c set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType c set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
 autocmd FileType go nnoremap map <f3> :GoDef<CR>
@@ -100,7 +99,8 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mtth/scratch.vim'
 Plug 'quabug/vim-gdscript'
@@ -118,7 +118,11 @@ Plug 'xolox/vim-notes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'unblevable/quick-scope'
-
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'octol/vim-cpp-enhanced-highlight'
+"
 "let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars=80
 
@@ -126,6 +130,7 @@ augroup qs_colors
   autocmd!
   autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+  "autocmd ColorScheme * highlight CocHighlightText ctermfg=00 ctermbg=7
 augroup END
 
 Plug 'Yggdroot/indentLine'
@@ -206,10 +211,14 @@ Plug '~/.fzf'
 " Initialize plugin system
 call plug#end()
 
-let g:gruvbox_contrast_dark = "soft"
-set t_Co=256
+"let g:gruvbox_contrast_dark = "soft"
+"set t_Co=256
+"set background=dark
+
+syntax on
+syntax enable
 set background=dark
-colorscheme codedark
+colorscheme nord
 
 let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
