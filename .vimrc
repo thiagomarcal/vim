@@ -13,13 +13,14 @@ set hlsearch
 set splitright
 
 "se mouse+=a
-set completeopt-=preview
+
 set rtp+=$GOROOT/misc/vim
 filetype off
 filetype plugin indent on
 syntax on
 
 autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cs set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
 autocmd FileType go nnoremap map <f2> :GoDoc<CR>
@@ -31,7 +32,17 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>c  <Plug>(go-coverage)
 
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-"nnoremap <silent> <C-p> :FZF<CR>
+nnoremap <silent> <C-p> :FZF<CR>
+inoremap <c-l> <esc>%%a
+
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <C-X> :bdelete<CR>
+
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+
 
 autocmd FileType python nnoremap <buffer> <F5> :exec '!clear; python' shellescape(@%, 1)<cr>
 
@@ -60,16 +71,23 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-surround'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'qpkorr/vim-bufkill'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
-
-let g:easytags_async=1
-
-nnoremap <leader>p :CtrlPTag<CR>
-
 Plug 'dunstontc/vim-vscode-theme'
-let g:echodoc_enable_at_startup = 1
+Plug 'w0rp/ale'
+Plug 'tpope/vim-dispatch'
+
+
+"C# Unity Plugin
+Plug 'OmniSharp/omnisharp-vim'
+let g:OmniSharp_server_use_mono = 1
+
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8'],
+\}
+
+let g:echodoc_enable_at_startup = 0
 let g:echodoc_type = 'echo'
 
 " Any valid git URL is allowed
@@ -94,6 +112,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 Plug 'davidhalter/jedi-vim'
+"Plug 'ap/vim-buftabline'
 Plug 'pangloss/vim-javascript'
 Plug '~/.fzf'
 
@@ -120,6 +139,8 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
+
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 
 "MOVE LINES
