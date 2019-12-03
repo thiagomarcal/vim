@@ -30,7 +30,9 @@ xnoremap p "_dP
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType c set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cpp set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
 autocmd FileType go nnoremap map <f3> :GoDef<CR>
@@ -105,7 +107,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'mtth/scratch.vim'
 Plug 'quabug/vim-gdscript'
 Plug 'calviken/vim-gdscript3'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/echodoc.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'danro/rename.vim'
@@ -117,21 +119,18 @@ Plug 'w0rp/ale'
 Plug 'xolox/vim-notes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'derekwyatt/vim-scala'
+Plug 'tpope/vim-commentary'
+
+au BufRead,BufNewFile *.sbt set filetype=scala
 "
 "let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_max_chars=80
-
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-  "autocmd ColorScheme * highlight CocHighlightText ctermfg=00 ctermbg=7
-augroup END
 
 Plug 'Yggdroot/indentLine'
 Plug 'terryma/vim-smooth-scroll'
@@ -218,7 +217,7 @@ call plug#end()
 syntax on
 syntax enable
 set background=dark
-colorscheme nord
+colorscheme codedark
 
 let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
