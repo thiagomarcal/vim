@@ -29,7 +29,7 @@ xnoremap p "_dP
 
 autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 autocmd FileType c set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType cpp set tabstop=2|set shiftwidth=2|set expandtab
@@ -126,6 +126,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'derekwyatt/vim-scala'
 Plug 'tpope/vim-commentary'
+
 
 au BufRead,BufNewFile *.sbt set filetype=scala
 "
@@ -241,9 +242,9 @@ au BufNewFile,BufRead *.py
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 inoremap <leader>j <Esc>:m .+1<CR>==gi
-inoremap <leader>k <Esc>:m .-2<CR>==gi
 vnoremap <leader>j :m '>+1<CR>gv=gv
 vnoremap <leader>k :m '<-2<CR>gv=gv
+inoremap <leader>k <Esc>:m .-2<CR>==gi
 
 
 "SAVE BUFFERS
