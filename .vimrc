@@ -1,8 +1,9 @@
+set hidden
 set visualbell
 set wildmenu
 "set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 set autowrite
-set clipboard=unnamedplus
+set clipboard=unnamed
 set laststatus=2
 set noshowmode
 set nu
@@ -11,38 +12,81 @@ set listchars=tab:▸\ ,eol:¬
 set noswapfile
 set hlsearch 
 set splitright
-
+set completeopt-=preview
 "se mouse+=a
+"
+"set cmdheight=2
+set updatetime=100
+set shortmess+=c
 
 set rtp+=$GOROOT/misc/vim
 filetype off
 filetype plugin indent on
-syntax on
 
+vmap y y`]
+
+xnoremap p "_dP
+
+autocmd FileType vue set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
-autocmd FileType cs set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
+autocmd FileType c set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType cpp set tabstop=2|set shiftwidth=2|set expandtab
 autocmd FileType go set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 
-autocmd FileType go nnoremap map <f2> :GoDoc<CR>
 autocmd FileType go nnoremap map <f3> :GoDef<CR>
+autocmd FileType go nnoremap map <f2> :GoDoc<CR>
 autocmd FileType go nnoremap map <f4> :GoDecls<CR>
 autocmd FileType go nnoremap map <f5> :GoRun<CR>
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>c  <Plug>(go-coverage)
 
+" coc binds
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <silent><expr> <c-space> coc#refresh()
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+imap <C-l> <Plug>(coc-snippets-expand)
+" format xml
+" set formatexpr=xmlformat#Format()
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+nmap <leader>rn <Plug>(coc-rename)
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-nnoremap <silent> <C-p> :FZF<CR>
-inoremap <c-l> <esc>%%a
+"nnoremap <silent> <C-p> :FZF<CR>
+nnoremap <leader>f gqip
 
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-nnoremap <C-X> :bdelete<CR>
+:tnoremap <Esc> <C-\><C-n>
 
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-
-
+"nnoremap <Tab> :bnext<CR> nnoremap <S-Tab> :bprevious<CR> nnoremap <C-X> :bdelete<CR>
 
 autocmd FileType python nnoremap <buffer> <F5> :exec '!clear; python' shellescape(@%, 1)<cr>
 
@@ -59,12 +103,13 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mtth/scratch.vim'
 Plug 'quabug/vim-gdscript'
 Plug 'calviken/vim-gdscript3'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/echodoc.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'danro/rename.vim'
@@ -73,21 +118,71 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'qpkorr/vim-bufkill'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'w0rp/ale'
-Plug 'tpope/vim-dispatch'
+Plug 'xolox/vim-notes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+" Plug 'unblevable/quick-scope'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'derekwyatt/vim-scala'
+Plug 'tpope/vim-commentary'
+Plug 'chrisbra/vim-xml-runtime'
+Plug 'tpope/vim-fugitive'
+
+au BufRead,BufNewFile *.sbt set filetype=scala
+"
+"let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_max_chars=80
+
+Plug 'Yggdroot/indentLine'
+Plug 'terryma/vim-smooth-scroll'
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+Plug 'neomake/neomake'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 0
+let g:loaded_youcompleteme = 1
 
 
-"C# Unity Plugin
-Plug 'OmniSharp/omnisharp-vim'
-let g:OmniSharp_server_use_mono = 1
+set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+Plug 'posva/vim-vue'
+
+autocmd FileType vue syntax sync fromstart
+
+Plug 'othree/html5.vim'
+
+Plug 'xolox/vim-misc'
+
+let g:easytags_async=1
+
+nnoremap <leader>p :CtrlPTag<CR>
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'],
 \}
 
-let g:echodoc_enable_at_startup = 0
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'python': ['autopep8'],
+\}
+
+let g:echodoc_enable_at_startup = 1
 let g:echodoc_type = 'echo'
 
 " Any valid git URL is allowed
@@ -116,14 +211,22 @@ Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 Plug '~/.fzf'
 
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'grvcoelho/vim-javascript-snippets'
+
 " Initialize plugin system
 call plug#end()
 
-let g:gruvbox_contrast_dark = "soft"
-set t_Co=256
+"let g:gruvbox_contrast_dark = "soft"
+"set t_Co=256
+"set background=dark
+
+syntax on
+syntax enable
 set background=dark
 colorscheme codedark
-
 
 let g:go_highlight_types = 1
 let g:go_highlight_functions = 1
@@ -140,8 +243,8 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "MOVE LINES
 nnoremap <leader>j :m .+1<CR>==
@@ -151,10 +254,13 @@ inoremap <leader>k <Esc>:m .-2<CR>==gi
 vnoremap <leader>j :m '>+1<CR>gv=gv
 vnoremap <leader>k :m '<-2<CR>gv=gv
 
+
 "SAVE BUFFERS
 nmap <c-s> :w<CR>
 vmap <c-s> <Esc><c-s>gv
 imap <c-s> <Esc><c-s>
 
-"KILL BUFFERS WITHOUT CLOSING VS
-map <C-c> :BD<cr>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
