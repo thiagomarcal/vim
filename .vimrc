@@ -105,6 +105,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+Plug 'jeetsukumaran/vim-buffergator'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mtth/scratch.vim'
 Plug 'quabug/vim-gdscript'
@@ -130,6 +134,7 @@ Plug 'derekwyatt/vim-scala'
 Plug 'tpope/vim-commentary'
 Plug 'chrisbra/vim-xml-runtime'
 Plug 'tpope/vim-fugitive'
+Plug 'rust-lang/rust.vim'
 
 au BufRead,BufNewFile *.sbt set filetype=scala
 "
@@ -137,12 +142,11 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 let g:qs_max_chars=80
 
 Plug 'Yggdroot/indentLine'
-Plug 'terryma/vim-smooth-scroll'
 
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 Plug 'neomake/neomake'
 Plug 'vim-scripts/indentpython.vim'
@@ -185,10 +189,14 @@ let g:ale_fixers = {
 let g:echodoc_enable_at_startup = 1
 let g:echodoc_type = 'echo'
 
+
+
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " On-demand loading
+Plug 'psliwka/vim-smoothie'
+"
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
@@ -250,9 +258,9 @@ au BufNewFile,BufRead *.py
 nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 inoremap <leader>j <Esc>:m .+1<CR>==gi
-inoremap <leader>k <Esc>:m .-2<CR>==gi
 vnoremap <leader>j :m '>+1<CR>gv=gv
 vnoremap <leader>k :m '<-2<CR>gv=gv
+inoremap <leader>k <Esc>:m .-2<CR>==gi
 
 
 "SAVE BUFFERS
@@ -264,3 +272,38 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
+
+
+
+" Shortcut to use blackhole register by default
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
+nnoremap x "_x
+vnoremap x "_x
+nnoremap X "_X
+vnoremap X "_X
+
+" Change <leader> to be comma
+let mapleader = " "
+let g:mapleader = " "
+
+" Shortcut to use clipboard with <leader>
+
+nnoremap <leader>d d
+vnoremap <leader>d d
+nnoremap <leader>D D
+vnoremap <leader>D D
+nnoremap <leader>c c
+vnoremap <leader>c c
+nnoremap <leader>C C
+vnoremap <leader>C C
+nnoremap <leader>x x
+vnoremap <leader>x x
+nnoremap <leader>X X
+vnoremap <leader>X X
